@@ -276,7 +276,7 @@
 			"if itest.s \"xusb\" == \"x${dtype}\" ; then " \
 				"usb start ;" \
 			"fi; " \
-			"for disk in 0 1 ; do ${dtype} dev ${disk} ;" \
+			"for disk in 2 ; do ${dtype} dev ${disk} ;" \
 				"load " \
 					"${dtype} ${disk}:1 " \
 					"10008000 " \
@@ -296,7 +296,7 @@
 			"else " \
 				"initcmd='mmc rescan' ;" \
 			"fi; " \
-			"for disk in 0 1 ; do " \
+			"for disk in 2 ; do " \
 				"if $initcmd && $dtype dev $disk ; then " \
 					"setenv stdout serial,vga; " \
 					"echo expose ${dtype} ${disk} " \
@@ -311,7 +311,7 @@
 	"initrd_high=0xffffffff\0" \
 	"upgradeu=for dtype in ${bootdevs}" \
 		"; do " \
-		"for disk in 0 1 ; do ${dtype} dev ${disk} ;" \
+		"for disk in 2 ; do ${dtype} dev ${disk} ;" \
 			"load ${dtype} ${disk}:1 10008000 " \
 				"/6x_upgrade " \
 				"&& source 10008000 ; " \
