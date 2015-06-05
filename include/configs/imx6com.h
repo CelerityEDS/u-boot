@@ -1,8 +1,7 @@
 /*
  * Copyright (C) 2010-2011 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Boundary Devices Nitrogen6X
- * and Freescale i.MX6Q Sabre Lite boards.
+ * Configuration settings for CelerityEDS iMX6COM
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
@@ -14,8 +13,6 @@
 #define CONFIG_MX6
 #define CONFIG_DISPLAY_CPUINFO
 #define CONFIG_DISPLAY_BOARDINFO
-
-#define CONFIG_MACH_TYPE	3769
 
 #include <asm/arch/imx-regs.h>
 #include <asm/imx-common/gpio.h>
@@ -198,7 +195,7 @@
 	"echo ; echo Celerity iMX6COM -- Booting from SD Card... ; " \
 	"mmc rescan ; " \
 	"fatload mmc 0 0x10800000 uImage ; " \
-	"fatload mmc 0 0x12000000 imx6q-celerityCOM.dtb ; " \
+	"fatload mmc 0 0x12000000 imx6q-imx6com.dtb ; " \
 	"bootm 0x10800000 - 0x12000000 ; "
 
 /* Miscellaneous configurable options */

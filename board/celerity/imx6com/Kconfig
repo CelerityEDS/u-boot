@@ -1,7 +1,7 @@
-if TARGET_CELERITY_IMX6COM
+if TARGET_IMX6COM
 
 config SYS_BOARD
-	default "celerity_iMX6COM"
+	default "imx6com"
 
 config SYS_VENDOR
 	default "celerity"
@@ -10,6 +10,6 @@ config SYS_SOC
 	default "mx6"
 
 config SYS_CONFIG_NAME
-	default "celerity_iMX6COM"
+	default "imx6com"
 
 endif

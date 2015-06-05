@@ -498,8 +498,8 @@ config TARGET_NITROGEN6X
 	bool "Support nitrogen6x"
 	select CPU_V7
 
-config TARGET_CELERITY_IMX6COM
-	bool "Support celerity_iMX6COM"
+config TARGET_IMX6COM
+	bool "Support imx6com"
 	select CPU_V7
 
 config TARGET_CGTQMX6EVAL
@@ -800,7 +800,7 @@ source "board/boundary/nitrogen6x/Kconfig"
 source "board/broadcom/bcm28155_ap/Kconfig"
 source "board/broadcom/bcmcygnus/Kconfig"
 source "board/broadcom/bcmnsp/Kconfig"
-source "board/celerity/celerity_iMX6COM/Kconfig"
+source "board/celerity/imx6com/Kconfig"
 source "board/cirrus/edb93xx/Kconfig"
 source "board/compulab/cm_t335/Kconfig"
 source "board/compulab/cm_fx6/Kconfig"
