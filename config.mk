@@ -13,7 +13,7 @@
 #  That's the reason why this file must be included from spl/Makefile too.
 #  If we did not have Tegra SoCs, build system would be much simpler...)
 PLATFORM_RELFLAGS :=
-PLATFORM_CPPFLAGS :=
+PLATFORM_CPPFLAGS := -ggdb
 PLATFORM_LDFLAGS :=
 LDFLAGS :=
 LDFLAGS_FINAL :=
