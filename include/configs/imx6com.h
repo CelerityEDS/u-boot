@@ -187,16 +187,40 @@
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"bootdevs=" CONFIG_DRIVE_TYPES "\0" \
 	"umsdevs=" CONFIG_UMSDEVS "\0" \
+	"bootdevice=emmc\0" \
 	"bootcmd=" \
-	"setenv fdt_high 0xffffffff ; " \
-	"setenv fdt_addr 0x13000000 ; " \
-	"setenv bootargs 'console=ttymxc0,115200n8 no_console_suspend video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 " \
+		"setenv fdt_high 0xffffffff ; " \
+		"setenv fdt_addr 0x13000000 ; " \
+		"setenv bootargs 'console=ttymxc0,115200n8 no_console_suspend video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 " \
 		"fbmem=12M root=/dev/mmcblk0p2 rw rootwait' ; " \
-	"echo ; echo Celerity iMX6COM -- Booting from SD Card... ; " \
-	"mmc rescan ; " \
-	"fatload mmc 0 0x10800000 uImage ; " \
-	"fatload mmc 0 0x12000000 imx6q-imx6com.dtb ; " \
-	"bootm 0x10800000 - 0x12000000 ; "
+		"saveenv ; " \
+		"if test \"${bootdevice}\" = \"emmc\"; then " \
+		"echo && echo Celerity iMX6COM -- Booting from eMMC Card... && " \
+		"run bootfromemmc; " \
+		"elif test \"${bootdevice}\" = \"usb\"; then " \
+		"echo && echo Celerity iMX6COM -- Booting from USB... && " \
+		"run bootfromusb; " \
+		"fi\0" \
+	"prepemmc=ums 0 mmc 2\0" \
+	"prepsd=ums 0  mmc 1\0" \
+	"updateflashfromusb=if fatload usb 0 0x10800000 u-boot.imx; then " \
+		"sf probe && sf erase 0 0xc0000 && sf write 0x10800000 0x400 $filesize && " \
+		"echo flash is now updated ; fi\0" \
+	"updateflashfromemmc=if fatload mmc 2 0x10800000 u-boot.imx; then " \
+		"sf probe && sf erase 0 0xc0000 && sf write 0x10800000 0x400 $filesize && " \
+		"echo flash is now updated ; fi\0" \
+	"clearenv=if sf probe || sf probe || sf probe 1 ; then " \
+		"sf erase 0xc0000 0x2000 && " \
+		"echo restored environment to factory default ; fi\0" \
+	"bootfromsd=fatload mmc 0 0x10800000 uImage; " \
+		"fatload mmc 0 0x12000000 imx6q-imx6com.dtb; " \
+		"bootm 0x10800000 - 0x12000000\0" \
+	"bootfromemmc=fatload mmc 2 0x10800000 uImage; " \
+		"fatload mmc 2 0x12000000 imx6q-imx6com.dtb; " \
+		"bootm 0x10800000 - 0x12000000\0" \
+	"bootfromusb=fatload usb 0 0x10800000 uImage; " \
+		"fatload usb 0 0x12000000 imx6q-imx6com.dtb; " \
+		"bootm 0x10800000 - 0x12000000\0" \
 
 /* Miscellaneous configurable options */
 #define CONFIG_SYS_LONGHELP

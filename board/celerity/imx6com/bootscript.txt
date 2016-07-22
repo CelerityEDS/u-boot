@@ -1,0 +1,15 @@
+setenv bootargs enable_wait_mode=off
+
+setenv fdtfile imx6q-imx6com.dtb
+setenv fdtaddr 0x14000000
+
+setenv bootargs $bootargs
+setenv bootargs $bootargs console=ttymxc0,115200 vmalloc=400M consoleblank=0 rootwait
+
+if test "sata" = "${dtype}" ; then
+	setenv bootargs "$bootargs root=/dev/sda1" ;
+else
+	setenv bootargs "$bootargs root=/dev/mmcblk2p2" ;
+fi
+${fs}load ${dtype} ${disk}:1 10008000 uImage && ${fs}load ${dtype} ${disk}:1 ${fdtaddr} ${fdtfile} && bootm 10008000 - ${fdtaddr};
+echo "Error loading kernel image"
