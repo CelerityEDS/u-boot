@@ -12,4 +12,4 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
-obj-y	+= link.o
+#obj-y	+= link.o

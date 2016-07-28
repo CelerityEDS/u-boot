@@ -1,0 +1,6 @@
+LOON SWITCH BOARD
+M:	Warranyu Walton <wwalton@celerityeds.com>
+S:	Maintained
+F:	board/google/loonswitch/
+F:	include/configs/loonswitch.h
+F:	configs/loonswitch_defconfig

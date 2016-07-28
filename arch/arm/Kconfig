@@ -532,6 +532,10 @@ config TARGET_MX6SXSABRESD
 	select CPU_V7
 	select SUPPORT_SPL
 
+config TARGET_LOONSWITCH
+	bool "Google Loon Switch"
+	select CPU_V7	
+
 config TARGET_GW_VENTANA
 	bool "Support gw_ventana"
 	select CPU_V7
@@ -828,6 +832,7 @@ source "board/freescale/mx6sxsabresd/Kconfig"
 source "board/freescale/vf610twr/Kconfig"
 source "board/gateworks/gw_ventana/Kconfig"
 source "board/genesi/mx51_efikamx/Kconfig"
+source "board/google/loonswitch/Kconfig"
 source "board/gumstix/pepper/Kconfig"
 source "board/h2200/Kconfig"
 source "board/hale/tt01/Kconfig"
