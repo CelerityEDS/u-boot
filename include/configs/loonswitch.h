@@ -172,12 +172,11 @@
 	"umsdevs=" CONFIG_UMSDEVS "\0" \
 	"dtb=imx6q-loonswitch.dtb\0" \
 	"bootdevice=sd\0" \
+	"bootargs=console=ttymxc0,115200n8 earlyprintk=serial,ttymxc0,115200 no_console_suspend\0" \
 	"bootcmd=" \
 		"setenv fdt_high 0xffffffff ; " \
 		"setenv fdt_addr 0x12000000 ; " \
 		"setenv uimage_addr 0x10800000 ; " \
-		"setenv bootargs 'console=ttymxc0,115200n8 earlyprintk=serial,ttymxc0,115200 no_console_suspend " \
-		"root=/dev/mmcblk1p2 rw rootwait' ; " \
 		"saveenv ; " \
 		"if test \"${bootdevice}\" = \"sd\"; then " \
 		"echo && echo Google Loonswitch -- Booting from SD Card... && " \
@@ -197,10 +196,12 @@
 	"clearenv=if sf probe || sf probe || sf probe 1 ; then " \
 		"sf erase 0xc0000 0x2000 && " \
 		"echo restored environment to factory default ; fi\0" \
-	"bootfromemmc=fatload mmc 1 ${uimage_addr} uImage; " \
+	"bootfromemmc=setenv bootargs '${bootargs} root=/dev/mmcblk1p2 rw rootwait' ; " \
+		"fatload mmc 1 ${uimage_addr} uImage; " \
 		"fatload mmc 1 ${fdt_addr} ${dtb}; " \
 		"bootm ${uimage_addr} - ${fdt_addr}\0" \
-	"bootfromsd=fatload mmc 0 ${uimage_addr} uImage; " \
+	"bootfromsd=setenv bootargs '${bootargs} root=/dev/mmcblk0p2 rw rootwait' ; " \
+		"fatload mmc 0 ${uimage_addr} uImage; " \
 		"fatload mmc 0 ${fdt_addr} ${dtb}; " \
 		"bootm ${uimage_addr} - ${fdt_addr}\0" \
 
