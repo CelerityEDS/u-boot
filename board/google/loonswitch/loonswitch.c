@@ -426,14 +426,17 @@ static iomux_v3_cfg_t const init_pads[] = {
 
 static unsigned gpios_out_low[] = {
 	IMX_GPIO_NR(4, 15),	/* enable USB otg power */
+	IMX_GPIO_NR(1, 9),  /* smart card reset */
 };
 
 static unsigned gpios_out_high[] = {
+
 	IMX_GPIO_NR(1, 17), /* HEATER_OFF */
 	IMX_GPIO_NR(2, 26),	/* BCM_PWREN */
 	IMX_GPIO_NR(2, 28),	/* BCM_PERSTn */
 	IMX_GPIO_NR(2, 25),	/* WIFI_5V_PWREN */
 	IMX_GPIO_NR(2, 23),	/* WIFI_PWREN */
+	IMX_GPIO_NR(4, 5),	/* USB_HUB_RESET_B */
 };
 
 static void set_gpios(unsigned *p, int cnt, int val)
