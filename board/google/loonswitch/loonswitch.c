@@ -395,26 +395,20 @@ int board_eth_init(bd_t *bis)
 
 	setup_iomux_enet();
 
-#ifdef CONFIG_FEC_MXC
 	bus = fec_get_miibus(base, -1);
 	if (!bus)
 		return -EINVAL;
 	/* scan phy 4,5,6,7 */
-	phydev = phy_find_by_mask(bus, (0xff), PHY_INTERFACE_MODE_RGMII);
+	phydev = phy_find_by_mask(bus, (0xF << 3), PHY_INTERFACE_MODE_RGMII);
 	if (!phydev) {
 		ret = -EINVAL;
-		goto free_bus;
+		free(bus);
+		return ret;
 	}
 	printf("using phy at %d\n", phydev->addr);
 	ret  = fec_probe(bis, -1, base, bus, phydev);
 	if (ret)
-		goto free_phydev;
-#endif
-
-free_phydev:
-	free(phydev);
-free_bus:
-	free(bus);
+		free(phydev);
 	return ret;
 }
 
