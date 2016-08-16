@@ -436,15 +436,14 @@ static iomux_v3_cfg_t const init_pads[] = {
 
 static unsigned gpios_out_low[] = {
 	IMX_GPIO_NR(1, 9),  /* smart card reset */
-};
-
-static unsigned gpios_out_high[] = {
-
 	IMX_GPIO_NR(1, 17), /* HEATER_OFF */
 	IMX_GPIO_NR(2, 26),	/* BCM_PWREN */
 	IMX_GPIO_NR(2, 28),	/* BCM_PERSTn */
-	IMX_GPIO_NR(2, 25),	/* WIFI_5V_PWREN */
 	IMX_GPIO_NR(2, 23),	/* WIFI_PWREN */
+	IMX_GPIO_NR(2, 25),	/* WIFI_5V_PWREN */
+};
+
+static unsigned gpios_out_high[] = {
 	IMX_GPIO_NR(4, 5),	/* USB_HUB_RESET_B */
 };
 
@@ -491,6 +490,17 @@ int board_init(void)
 #ifdef CONFIG_CMD_SATA
 	setup_sata();
 #endif
+
+	gpio_set_value(IMX_GPIO_NR(1, 17), 1);
+	udelay(1000 * 1000);
+	gpio_set_value(IMX_GPIO_NR(2, 26), 1);
+	udelay(1000 * 1000);	
+	gpio_set_value(IMX_GPIO_NR(2, 28), 1);
+	udelay(1000 * 1000);
+	gpio_set_value(IMX_GPIO_NR(2, 23), 1);
+	udelay(1000 * 1000);
+	gpio_set_value(IMX_GPIO_NR(2, 25), 1);
+	udelay(1000 * 1000);
 
 	return 0;
 }
