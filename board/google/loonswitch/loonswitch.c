@@ -432,6 +432,7 @@ static iomux_v3_cfg_t const init_pads[] = {
 	MX6_PAD_NANDF_CS3__GPIO6_IO16	| MUX_PAD_CTRL(NO_PAD_CTRL),
 	MX6_PAD_NANDF_D0__GPIO2_IO00	| MUX_PAD_CTRL(NO_PAD_CTRL),
 	MX6_PAD_NANDF_D1__GPIO2_IO01	| MUX_PAD_CTRL(NO_PAD_CTRL),
+	MX6_PAD_EIM_EB2__GPIO2_IO30		| MUX_PAD_CTRL(NO_PAD_CTRL),
 };
 
 static unsigned gpios_out_low[] = {
@@ -445,6 +446,7 @@ static unsigned gpios_out_low[] = {
 
 static unsigned gpios_out_high[] = {
 	IMX_GPIO_NR(4, 5),	/* USB_HUB_RESET_B */
+	IMX_GPIO_NR(2, 30),
 };
 
 static void set_gpios(unsigned *p, int cnt, int val)
